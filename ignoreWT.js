@@ -16,5 +16,5 @@ CompatibleCalculator._getCompatible = function(active, passive, weapon) {
 	return compat;
 };
 
-
+	}
 })();
