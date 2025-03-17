@@ -11,10 +11,9 @@ CompatibleCalculator._getCompatible = function(active, passive, weapon) {
 
 	if (weapon.custom.ignoreTriangle === true || weaponPassive.custom.ignoreTriangle === true) {
 		return null;
-	}
+	}}
 	
 	return compat;
-};
 
 	}
 })();
