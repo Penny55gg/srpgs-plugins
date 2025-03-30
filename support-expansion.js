@@ -1,5 +1,5 @@
 // "By" Penny with major help from PCMath and Sir Francis
-// Give a support skill {agi: x} for the support to give agility.
+// Give a support skill {agi: x} for the support to give agility, and give a support skill {mov: x} to give it movement.
 
 // Overwrites SupportCalculator._checkSkillStatus
 
@@ -39,13 +39,14 @@
                         continue  ;
                     }
                     totalStatus.agi = skill.custom.agi;
+                    totalStatus.mov = skill.custom.mov;
             }
         }
     }
 
-    var alias3 = AbilityCalculator.getAgility;
+    var alias = AbilityCalculator.getAgility;
     AbilityCalculator.getAgility = function(active, passive, weapon) {
-        var agi = alias3.call(this, active, passive, weapon);
+        var agi = alias.call(this, active, passive, weapon);
         var totalStatus = SupportCalculator.createTotalStatus(active);
 
         if (totalStatus.agi != null) {
@@ -54,6 +55,19 @@
 
         return agi;
     }
+
+    var alias2 = ParamBonus.getMov;
+    ParamBonus.getMov = function(unit) {
+        var mov = alias2.call(this, unit);
+        var totalStatus = SupportCalculator.createTotalStatus(unit);
+
+        if (totalStatus.mov != null) {
+            mov += totalStatus.mov;
+        }
+
+        return mov;
+    }
+
 
 
 })();
