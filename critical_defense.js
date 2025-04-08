@@ -1,4 +1,4 @@
-// Skill that halves the amount of critical damage taken.
+// Skill that halves the amount of critical damage taken. Uses the keyword "crit-defense"
 // By Penny
 
 (function(){
