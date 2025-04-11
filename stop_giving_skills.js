@@ -9,8 +9,9 @@
     var maxCount = DataConfig.getMaxSkillCount();
     var list = unit.getSkillReferenceList();
     var count = list.getTypeCount();
+    var type = item.getItemType();
 
-    if (count == maxCount) {
+    if (count == maxCount && type === ItemType.SKILLGET) {
         return false;
     }
 
