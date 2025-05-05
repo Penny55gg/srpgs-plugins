@@ -24,7 +24,7 @@
             for (i = 0; i < count; i++) {
                 stateId = list.getData(i).getState().getId();
                 if (stateId === checkId) {
-                    if (skill.custom.category == "both" || skill.cutsom.category != null) {
+                    if (skill.custom.category == "both" || skill.custom.category != null) {
                         dmg += skill.custom.dmg;
                         break;
                     } else if (!Miscellaneous.isPhysicsBattle(weapon) && skill.custom.category == "magical") {
