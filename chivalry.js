@@ -1,6 +1,6 @@
 // By Penny
-// Replicates the effects of Pragmatic from Fire Emblem
-// Use the custom keyword, "pragmatic" with a custom skill
+// Replicates the effects of Chivalry from Fire Emblem
+// Use the custom keyword, "chivalry" with a custom skill
 
 (function() {
 var alias2 = DamageCalculator.calculateAttackPower;
