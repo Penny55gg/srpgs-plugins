@@ -3,11 +3,10 @@
 
 // Overwrites SupportCalculator._checkSkillStatus
 
-
 (function() {
     SupportCalculator._checkSkillStatus = function(unit, targetUnit, isSelf, totalStatus) {
         var i, skill, isSet, indexArray;
-        var arr = SkillControl.getDirectSkillArray(unit, SkillType.SUPPORT, '');
+        var arr = SkillControl.getDirectSkillArray(unit, SkillType.SUPPORT, "");
         var count = arr.length;
 
         for (i = 0; i < count; i++) {
@@ -18,12 +17,19 @@
                 if (skill.getRangeType() === SelectionRangeType.SELFONLY) {
                     isSet = true;
                 }
-            } else {
+            }
+            else {
                 if (skill.getRangeType() === SelectionRangeType.ALL) {
                     // If it's "All", always enable to support.
                     isSet = true;
-                } else if (skill.getRangeType() === SelectionRangeType.MULTI) {
-                    indexArray = IndexArray.getBestIndexArray(unit.getMapX(), unit.getMapY(), 1, skill.getRangeValue());
+                }
+                else if (skill.getRangeType() === SelectionRangeType.MULTI) {
+                    indexArray = IndexArray.getBestIndexArray(
+                        unit.getMapX(),
+                        unit.getMapY(),
+                        1,
+                        skill.getRangeValue()
+                    );
                     // If it's "Specify", check if the unit exists at the position in arr.
                     isSet = IndexArray.findUnit(indexArray, targetUnit);
                 }
@@ -31,18 +37,22 @@
 
             if (isSet && this._isSupportable(unit, targetUnit, skill)) {
                 this._addStatus(totalStatus, skill.getSupportStatus());
-                    if(!skill.custom.agi) {
-                        continue  ;
-                    }
-                    if(totalStatus.agi) {
-                        totalStatus.agi += skill.custom.agi;
-                        continue  ;
-                    }
+                if (!totalStatus.agi) {
                     totalStatus.agi = skill.custom.agi;
+                }
+                else if (skill.custom.agi) {
+                    totalStatus.agi += skill.custom.agi;
+                }
+
+                if (!totalStatus.mov) {
                     totalStatus.mov = skill.custom.mov;
+                }
+                else if (skill.custom.mov) {
+                    totalStatus.mov += skill.custom.mov;
+                }
             }
         }
-    }
+    };
 
     var alias = AbilityCalculator.getAgility;
     AbilityCalculator.getAgility = function(active, passive, weapon) {
@@ -54,7 +64,7 @@
         }
 
         return agi;
-    }
+    };
 
     var alias2 = ParamBonus.getMov;
     ParamBonus.getMov = function(unit) {
@@ -66,8 +76,7 @@
         }
 
         return mov;
-    }
-
-
-
+    };
 })();
+
+// Fixed plugin only working if agi was set - FotF, 2025/07/03
