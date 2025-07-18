@@ -9,30 +9,29 @@
 
 // For a very specific skill where they pick a state at random to give a unit every single turn until turn 7
 
-(function () {
+(function() {
     alias1 = TurnChangeStart.doLastAction;
     TurnChangeStart.doLastAction = function() {
         alias1.call(this);
 
         var i, unit;
-		var list = TurnControl.getActorList();
-		var count = list.getCount();
-        
-		for (i = 0 ; i < count; i++) {
+        var list = TurnControl.getActorList();
+        var count = list.getCount();
+
+        for (i = 0; i < count; i++) {
             // Enter your list of state IDs to give the unit here.
-			unit = list.getData(i);
+            unit = list.getData(i);
             var skill = SkillControl.getPossessionCustomSkill(unit, "LuckySevenHouse");
             if (skill != null) {
-            var stateList = skill.custom.stateList;
-			random = Math.floor(Math.random() * stateList.length);
-
-			if ((stateList.length != 0) && (root.getCurrentSession().getTurnCount() <= 7)) {
-                var state = root.getBaseData().getStateList().getDataFromId(stateList[random]);
-                StateControl.arrangeState(unit, state, IncreaseType.INCREASE);
+                var stateList = skill.custom.stateList;
+                var random = Math.floor(Math.random() * stateList.length);
+                if ((stateList.length != 0) && (root.getCurrentSession().getTurnCount() <= 7)) {
+                    var state = root.getBaseData().getStateList().getDataFromId(stateList[random]);
+                    StateControl.arrangeState(unit, state, IncreaseType.INCREASE);
+                }
             }
-		}
+        }
     }
-}
 
 
 
