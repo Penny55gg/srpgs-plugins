@@ -1,4 +1,4 @@
-// Fixes that stupid "???" on the menu.
+// Fixes that stupid "???" on the shop menu to not appear anymore. Shops will only show up if they are unlocked.
 // Overwrites ShopListScreen.getShopEntryArray
 
 (function() {
@@ -27,3 +27,4 @@
 		return arr;
         }
 })();
+
